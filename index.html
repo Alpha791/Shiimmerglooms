@@ -202,16 +202,16 @@
 
   <script>
     const jewelryItems = [
-      {name: "Elegant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101930.jpg", category: "Chunky"},
-      {name: "Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101928.jpg", category: "Chunky"},
-      {name: "Steel Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101932.jpg", category: "Chunky"},
-      {name: "Steel Bracelet", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101936.jpg", category: "Chunky"},
-      {name: "Bold Chunky Ring", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101945.jpg", category: "Chunky"},
-      {name: "Chunky Gold Chain", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101951.jpg", category: "Chunky"},
-      {name: "Healing Stone Bracelet", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101961.jpg", category: "Chunky"},
-      {name: "Trauma Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101964.jpg", category: "Chunky"},
-      {name: "Heart Love Necklace", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101967.jpg", category: "Chunky"},
-      {name: "Rose Gold Love Ring", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101969.jpg", category: "Chunky"},
+      {name: "Elegant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101930.jpg", category: "Brass"},
+      {name: "Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101928.jpg", category: "Brass"},
+      {name: "Steel Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101932.jpg", category: "Chunky Steel"},
+      {name: "Steel Bracelet", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101936.jpg", category: "Chunky Steel"},
+      {name: "Bold Chunky Ring", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101945.jpg", category: "Chunky Jewelry"},
+      {name: "Chunky Gold Chain", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101951.jpg", category: "Chunky Jewelry"},
+      {name: "Healing Stone Bracelet", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101961.jpg", category: "Trauma Corner"},
+      {name: "Trauma Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101964.jpg", category: "Trauma Corner"},
+      {name: "Heart Love Necklace", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101967.jpg", category: "Love Corner"},
+      {name: "Rose Gold Love Ring", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shoe-/main/images/1000101969.jpg", category: "Love Corner"},
     ];
 
     let currentCategory = "All";
@@ -223,7 +223,9 @@
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" onclick="openModal('${item.image}','${item.name}','${item.price}')">
+          <img loading="lazy" src="${item.image}" alt="${item.name}" 
+               onerror="this.src='https://via.placeholder.com/200x200?text=Image+Not+Found'" 
+               onclick="openModal('${item.image}','${item.name}','${item.price}')">
           <h3>${item.name}</h3>
           <p>${item.price}</p>
         `;
@@ -257,6 +259,7 @@
       document.getElementById("productModal").classList.remove("active");
     }
 
+    // Initial load
     displayGallery(jewelryItems);
   </script>
 </body>
