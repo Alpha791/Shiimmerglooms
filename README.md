@@ -1,2 +1,2 @@
-# Shiimmerglooms
+# Shimmerglooms
 your one stop shop
