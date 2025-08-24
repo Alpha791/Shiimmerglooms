@@ -1,170 +1,295 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Frigates Stores - Jewelry Collection</title>
+  <title>Shimmer Bloom - Elevate Yourself Everyday</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
   <style>
+    :root {
+      --primary: #406141;
+      --bg-dark: #0e0e0e;
+      --card-bg: #1c1c1c;
+      --text-light: #e0e0e0;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f7f7f7;
-      color: #333;
-      user-select: none; /* disable text selection */
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      user-select: none; /* prevent text selection */
     }
+
     header {
-      background: #111;
-      color: #fff;
-      padding: 1rem;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      padding: 1.5rem;
       text-align: center;
+      color: white;
     }
-    .gallery {
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .search-bar {
+      text-align: center;
+      margin: 1rem;
+    }
+
+    .search-bar input {
+      padding: 10px 20px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 30px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .category-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .category-buttons button {
+      background: var(--primary);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .category-buttons button:hover {
+      background: #2f4c32;
+    }
+
+    main {
+      flex: 1;
+      padding: 1rem;
+    }
+
+    #jewelry-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      gap: 1.5rem;
     }
-    .item {
-      background: #fff;
+
+    .product-card {
+      background: var(--card-bg);
       border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease;
     }
-    .item:hover {
-      transform: scale(1.03);
+
+    .product-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     }
-    .item img {
+
+    .product-card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      pointer-events: none; /* disable drag */
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
     }
-    .details {
-      padding: 15px;
+
+    footer {
+      background-color: #111;
       text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
     }
-    .details h3 {
-      margin: 0;
-      font-size: 1.1rem;
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
     }
-    .details p {
-      margin: 5px 0;
-    }
-    .price {
-      color: #e91e63;
-      font-weight: bold;
-    }
-    /* Modal */
+
     .modal {
       display: none;
       position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
+      top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      align-items: center;
+      background: rgba(0, 0, 0, 0.75);
       justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
+
+    .modal.active {
+      display: flex;
+    }
+
     .modal-content {
-      background: #fff;
-      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
       border-radius: 12px;
-      max-width: 500px;
-      width: 90%;
+      padding: 2rem;
+      color: white;
+      max-width: 400px;
       text-align: center;
       position: relative;
     }
+
     .modal-content img {
       width: 100%;
       border-radius: 10px;
+      margin-bottom: 1rem;
+      max-height: 300px;
+      object-fit: contain;
     }
-    .close {
+
+    .modal .close {
       position: absolute;
-      top: 10px; right: 15px;
-      font-size: 22px;
+      top: 10px; right: 20px;
+      font-size: 1.5rem;
       cursor: pointer;
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false">
   <header>
-    <h1>Frigates Stores Jewelry Collection</h1>
-    <p>Exclusive Jewelry - Elevate Yourself Everyday</p>
+    <h1>Shimmer Bloom</h1>
+    <p>Treat yourself, you deserve it!</p>
   </header>
 
-  <div class="gallery" id="gallery"></div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for jewelry..." oninput="filterGallery()">
+  </div>
 
-  <!-- Modal -->
-  <div class="modal" id="modal">
+  <div class="category-buttons">
+    <button onclick="filterCategory('All')">All</button>
+    <button onclick="filterCategory('Brass')">Brass</button>
+    <button onclick="filterCategory('Chunky')">Chunky</button>
+    <button onclick="filterCategory('Silver')">Silver</button>
+    <button onclick="filterCategory('Gold')">Gold</button>
+    <button onclick="filterCategory('Trauma Corner')">Trauma Corner</button>
+    <button onclick="filterCategory('Love Corner')">Love Corner</button>
+    <button onclick="filterCategory('Lava Pendant')">Lava Pendant</button>
+  </div>
+
+  <main>
+    <div id="jewelry-gallery"></div>
+  </main>
+
+  <div class="modal" id="productModal">
     <div class="modal-content">
-      <span class="close" id="close">&times;</span>
-      <img id="modalImg" src="" alt="">
-      <h3 id="modalName"></h3>
-      <p id="modalPrice"></p>
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-image" />
+      <h2 id="modal-product-name"></h2>
+      <p id="modal-product-price"></p>
+      <a id="modal-whatsapp-link" class="contact-btn" target="_blank">WhatsApp Us</a>
     </div>
   </div>
 
+  <footer>
+    <a href="https://wa.me/254793627445" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </footer>
+
   <script>
-    // ======= Product List =======
     const jewelryItems = [
-      {name:"Lava Pendant 1",price:"KES 2500",image:"https://i.imgur.com/abc1.jpg",category:"Pendant"},
-      {name:"Lava Pendant 2",price:"KES 2800",image:"https://i.imgur.com/abc2.jpg",category:"Pendant"},
-      {name:"Silver Bracelet",price:"KES 1800",image:"https://i.imgur.com/xyz1.jpg",category:"Bracelet"},
-      {name:"Gold Ring",price:"KES 3200",image:"https://i.imgur.com/xyz2.jpg",category:"Ring"},
-      // 🔽 Add all remaining products here (same format)
+      {name: "Elegant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/istockphoto-2209163627-612x612.jpg", category: "Chunky"},
+      {name: "Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/download.webp", category: "Chunky"},
+      {name: "Steel Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/istockphoto-2218969499-612x612.jpg", category: "Chunky"},
+      {name: "Steel Bracelet", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/OIF.jpg", category: "Silver"},
+      {name: "Bold Chunky Ring", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/OIP.jpg", category: "Gold"},
+      /* All your Lava Pendants */
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0091.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0012.jpg", category : "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0013.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0055.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0057.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0059.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0061.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0063.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0065.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0067.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0069.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0071.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0073.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0075.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0077.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0079.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0081.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0083.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0085.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0087.jpg", category: "Lava Pendant"},
+      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0089.jpg", category: "Lava Pendant"},
     ];
 
-    // ======= Display Gallery =======
-    const gallery = document.getElementById('gallery');
-    jewelryItems.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" loading="lazy">
-        <div class="details">
+    let currentCategory = "All";
+
+    function displayGallery(items) {
+      const gallery = document.getElementById("jewelry-gallery");
+      gallery.innerHTML = "";
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" onclick="openModal('${item.image}','${item.name}','${item.price}')">
           <h3>${item.name}</h3>
-          <p class="price">${item.price}</p>
-          <p>${item.category}</p>
-        </div>
-      `;
-      div.onclick = () => openModal(item);
-      gallery.appendChild(div);
-    });
-
-    // ======= Modal Functions =======
-    const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modalImg");
-    const modalName = document.getElementById("modalName");
-    const modalPrice = document.getElementById("modalPrice");
-    const close = document.getElementById("close");
-
-    function openModal(item) {
-      modal.style.display = "flex";
-      modalImg.src = item.image;
-      modalName.textContent = item.name;
-      modalPrice.textContent = item.price;
+          <p>${item.price}</p>
+        `;
+        gallery.appendChild(card);
+      });
     }
-    close.onclick = () => modal.style.display = "none";
-    window.onclick = e => { if (e.target == modal) modal.style.display = "none"; };
 
-    // ======= Worldwide Protection =======
-    document.addEventListener("contextmenu", e => e.preventDefault()); // disable right-click
-    document.addEventListener("keydown", e => {
+    function filterGallery() {
+      const searchValue = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = jewelryItems.filter(item => {
+        return (currentCategory === "All" || item.category === currentCategory) &&
+               item.name.toLowerCase().includes(searchValue);
+      });
+      displayGallery(filtered);
+    }
+
+    function filterCategory(category) {
+      currentCategory = category;
+      filterGallery();
+    }
+
+    function openModal(image, name, price) {
+      document.getElementById("modal-image").src = image;
+      document.getElementById("modal-product-name").textContent = name;
+      document.getElementById("modal-product-price").textContent = price;
+      document.getElementById("modal-whatsapp-link").href = `https://wa.me/254793627445?text=I'm interested in ${name}`;
+      document.getElementById("productModal").classList.add("active");
+    }
+
+    function closeModal() {
+      document.getElementById("productModal").classList.remove("active");
+    }
+
+    // ---- WORLDWIDE PROTECTION ----
+    document.addEventListener("keydown", function(e) {
       if (
-        e.key === "F12" || 
-        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
-        (e.ctrlKey && (e.key === "U" || e.key === "S"))
+        (e.ctrlKey && (e.key === "u" || e.key === "U")) || // Ctrl+U
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) || // DevTools
+        (e.key === "F12")
       ) {
         e.preventDefault();
-        alert("This action is disabled for security.");
+        alert("Action disabled for security!");
       }
     });
+
+    displayGallery(jewelryItems);
   </script>
 </body>
 </html>
