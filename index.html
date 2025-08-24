@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +16,6 @@
       --card-bg: #1c1c1c;
       --text-light: #e0e0e0;
     }
-
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -26,145 +24,87 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      user-select: none; /* prevent text selection */
+      user-select: none; /* prevent text copying */
     }
-
     header {
       background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       padding: 1.5rem;
       text-align: center;
       color: white;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    .search-bar {
-      text-align: center;
-      margin: 1rem;
-    }
-
+    header h1 { margin: 0; font-size: 2rem; }
+    .search-bar { text-align: center; margin: 1rem; }
     .search-bar input {
       padding: 10px 20px;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 30px;
-      border: none;
-      outline: none;
+      width: 80%; max-width: 400px;
+      border-radius: 30px; border: none; outline: none;
       font-size: 16px;
     }
-
     .category-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
+      display: flex; justify-content: center; gap: 10px;
+      flex-wrap: wrap; margin-bottom: 1rem;
     }
-
     .category-buttons button {
-      background: var(--primary);
-      border: none;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
+      background: var(--primary); border: none;
+      color: white; padding: 8px 16px;
+      border-radius: 20px; cursor: pointer;
     }
-
-    .category-buttons button:hover {
-      background: #2f4c32;
-    }
-
-    main {
-      flex: 1;
-      padding: 1rem;
-    }
-
+    .category-buttons button:hover { background: #2f4c32; }
+    main { flex: 1; padding: 1rem; }
     #jewelry-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1.5rem;
     }
-
     .product-card {
       background: var(--card-bg);
       border-radius: 12px;
-      padding: 1rem;
-      text-align: center;
+      padding: 1rem; text-align: center;
       transition: transform 0.3s ease;
     }
-
     .product-card:hover {
       transform: translateY(-5px) scale(1.02);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     }
-
     .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      cursor: pointer;
+      width: 100%; height: 200px;
+      object-fit: cover; border-radius: 10px;
+      margin-bottom: 10px; cursor: pointer;
+      -webkit-user-drag: none; /* block drag */
     }
-
     footer {
-      background-color: #111;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
+      background-color: #111; text-align: center;
+      padding: 1rem; font-size: 0.9rem;
     }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
+    footer a { color: var(--primary); text-decoration: none; }
     .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
+      display: none; position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.75);
-      justify-content: center;
-      align-items: center;
+      justify-content: center; align-items: center;
       z-index: 1000;
     }
-
-    .modal.active {
-      display: flex;
-    }
-
+    .modal.active { display: flex; }
     .modal-content {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
       border-radius: 12px;
-      padding: 2rem;
-      color: white;
-      max-width: 400px;
-      text-align: center;
+      padding: 2rem; color: white;
+      max-width: 400px; text-align: center;
       position: relative;
     }
-
     .modal-content img {
-      width: 100%;
-      border-radius: 10px;
+      width: 100%; border-radius: 10px;
       margin-bottom: 1rem;
-      max-height: 300px;
-      object-fit: contain;
+      max-height: 300px; object-fit: contain;
     }
-
     .modal .close {
-      position: absolute;
-      top: 10px; right: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
+      position: absolute; top: 10px; right: 20px;
+      font-size: 1.5rem; cursor: pointer;
     }
   </style>
 </head>
-<body oncontextmenu="return false">
+<body>
   <header>
     <h1>Shimmer Bloom</h1>
     <p>Treat yourself, you deserve it!</p>
@@ -177,9 +117,8 @@
   <div class="category-buttons">
     <button onclick="filterCategory('All')">All</button>
     <button onclick="filterCategory('Brass')">Brass</button>
-    <button onclick="filterCategory('Chunky')">Chunky</button>
-    <button onclick="filterCategory('Silver')">Silver</button>
-    <button onclick="filterCategory('Gold')">Gold</button>
+    <button onclick="filterCategory('Chunky Steel')">Chunky Steel</button>
+    <button onclick="filterCategory('Chunky Jewelry')">Chunky Jewelry</button>
     <button onclick="filterCategory('Trauma Corner')">Trauma Corner</button>
     <button onclick="filterCategory('Love Corner')">Love Corner</button>
     <button onclick="filterCategory('Lava Pendant')">Lava Pendant</button>
@@ -200,18 +139,20 @@
   </div>
 
   <footer>
-    <a href="https://wa.me/254793627445" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="https://wa.me/254793627445" target="_blank">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
   </footer>
 
   <script>
-    const jewelryItems = [
+    // Your full product list (unchanged)
+    const jewelryItems = [ 
       {name: "Elegant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/istockphoto-2209163627-612x612.jpg", category: "Chunky"},
       {name: "Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/download.webp", category: "Chunky"},
       {name: "Steel Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/istockphoto-2218969499-612x612.jpg", category: "Chunky"},
       {name: "Steel Bracelet", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/OIF.jpg", category: "Silver"},
       {name: "Bold Chunky Ring", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/OIP.jpg", category: "Gold"},
-      /* All your Lava Pendants */
-      {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0091.jpg", category: "Lava Pendant"},
+      {name: "Lava pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0091.jpg", category: "Lava Pendant"},
       {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0012.jpg", category : "Lava Pendant"},
       {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0013.jpg", category: "Lava Pendant"},
       {name: "Lava Pendant", price: "KES 2000", image: "https://raw.githubusercontent.com/Alpha791/shimmerglooms/main/images/IMG-20250804-WA0055.jpg", category: "Lava Pendant"},
@@ -243,7 +184,7 @@
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" onclick="openModal('${item.image}','${item.name}','${item.price}')">
+          <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Not+Found'" onclick="openModal('${item.image}','${item.name}','${item.price}')">
           <h3>${item.name}</h3>
           <p>${item.price}</p>
         `;
@@ -277,19 +218,18 @@
       document.getElementById("productModal").classList.remove("active");
     }
 
-    // ---- WORLDWIDE PROTECTION ----
-    document.addEventListener("keydown", function(e) {
-      if (
-        (e.ctrlKey && (e.key === "u" || e.key === "U")) || // Ctrl+U
-        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) || // DevTools
-        (e.key === "F12")
-      ) {
-        e.preventDefault();
-        alert("Action disabled for security!");
-      }
-    });
-
     displayGallery(jewelryItems);
+
+    // ---------- SECURITY / PROTECTION ----------
+    document.addEventListener("contextmenu", e => e.preventDefault()); // block right-click
+    document.onkeydown = function(e) {
+      if (e.keyCode == 123 || // F12
+          (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) ||
+          (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'S'.charCodeAt(0)))) {
+        e.preventDefault();
+        return false;
+      }
+    };
   </script>
 </body>
 </html>
